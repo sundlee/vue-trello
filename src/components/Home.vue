@@ -17,14 +17,14 @@
         <a class="new-board-btn" href @click.prevent="addBoard">Create new board...</a>
       </div>
     </div>
-    <AddBoard v-if="isAddBoard" @close="isAddBoard=false" @submit="onAddBoard"></AddBoard>
+    <AddBoard v-if="isAddBoard" @close="isAddBoard=false" @submit="SET_IS_ADD_BOARD(true)"></AddBoard>
   </div>
 </template>
 
 <script>
 import { board } from '../api';
 import AddBoard from './AddBoard.vue';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
 	components: {
@@ -49,6 +49,7 @@ export default {
 		});
 	},
 	methods: {
+		...mapMutations([]),
 		fetchData() {
 			this.loading = true;
 			board
@@ -61,7 +62,7 @@ export default {
 				});
 		},
 		addBoard() {
-			this.isAddBoard = true;
+			this.$store.commit('SET_IS_ADD_BOARD', true);
 		},
 		onAddBoard(title) {
 			board.create(title).then(() => this.fetchData());
