@@ -17,7 +17,7 @@
         <a class="new-board-btn" href @click.prevent="addBoard">Create new board...</a>
       </div>
     </div>
-    <AddBoard v-if="isAddBoard" @close="isAddBoard=false" @submit="SET_IS_ADD_BOARD(true)"></AddBoard>
+    <AddBoard v-if="isAddBoard" @submit="onAddBoard" />
   </div>
 </template>
 
@@ -64,8 +64,8 @@ export default {
 		addBoard() {
 			this.$store.commit('SET_IS_ADD_BOARD', true);
 		},
-		onAddBoard(title) {
-			board.create(title).then(() => this.fetchData());
+		onAddBoard() {
+			this.fetchData();
 		},
 	},
 };
