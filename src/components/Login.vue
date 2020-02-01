@@ -50,8 +50,7 @@ export default {
 	},
 	methods: {
 		onSubmit() {
-			auth
-				.login(this.email, this.password)
+			auth.login(this.email, this.password)
 				.then(data => {
 					localStorage.setItem('token', data.accessToken);
 					setAuthInHeader(data.accessToken);
