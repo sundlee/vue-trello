@@ -26,7 +26,7 @@ export default {
 			setTimeout(() => {
 				this.cid = this.$route.params.cid;
 				this.loading = false;
-			}, 1500);
+			}, 500);
 		},
 	},
 };
