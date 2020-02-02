@@ -34,10 +34,16 @@ export const board = {
   create(title) {
     return request('post', '/boards', { title });
   }
-}
+};
 
 export const auth = {
   login(email, password) {
     return request('post', '/login', { email, password });
   }
-}
+};
+
+export const card = {
+  create(title, listId, pos) {
+    return request('post', '/cards', { title, listId, pos })
+  }
+};

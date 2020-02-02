@@ -10,7 +10,12 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
+  props: [
+    'list-id',
+  ],
   data() {
     return {
       inputTitle: '',
@@ -23,16 +28,20 @@ export default {
   },
   mounted() {
     this.$refs.inputText.focus();
-    console.log('000-0');
     // this.setupClickOutside(this.$el);
-    console.log('000-9');
   },
   methods: {
+    ...mapActions([
+      'ADD_CARD'
+    ]),
     onSubmit() {
-      console.log('submit@');
+      if (this.invalidInput) return;
+      const { inputTitle, listId } = this;
+      this.ADD_CARD({ title: inputTitle, listId })
+        .finally(() => this.inputTitle = '');
     },
     setupClickOutside(el) {
-      document.querySelector('body').addEventListener('click', (e) => {
+      document.querySelector('body').addEventListener('click', e => {
         if (el.contains(e.target)) return;
         this.$emit('close');
       });
